@@ -1,0 +1,6 @@
+.vscode
+.VSCodeCounter
+.idea
+
+node_modules
+.env
