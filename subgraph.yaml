@@ -1,0 +1,47 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Contract
+    network: mainnet
+    source:
+      address: "0x6f38e0f1a73c96cB3f42598613EA3474F09cB200"
+      abi: Contract
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - ClaimCleared
+        - ClaimDeleted
+        - ClaimMade
+        - ClaimPeriodChanged
+        - ClaimResolved
+        - CustomClaimCollateralChanged
+        - MigrationSucceeded
+        - Transfer
+      abis:
+        - name: Contract
+          file: ./abis/Contract.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: ClaimCleared(indexed address,uint256)
+          handler: handleClaimCleared
+        - event: ClaimDeleted(indexed address,indexed address,uint256)
+          handler: handleClaimDeleted
+        - event: ClaimMade(indexed address,indexed address,uint256)
+          handler: handleClaimMade
+        - event: ClaimPeriodChanged(uint256)
+          handler: handleClaimPeriodChanged
+        - event: ClaimResolved(indexed address,indexed address,uint256)
+          handler: handleClaimResolved
+        - event: CustomClaimCollateralChanged(address,uint256)
+          handler: handleCustomClaimCollateralChanged
+        - event: MigrationSucceeded(address)
+          handler: handleMigrationSucceeded
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
